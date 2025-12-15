@@ -1,12 +1,16 @@
+import pymongo
 from flask import Flask, render_template, request, jsonify
-from pymongo import MongoClient
+from dotenv import load_dotenv
 import json
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 # ----- MongoDB Atlas Connection -----
-MONGO_URI = "mongodb+srv://sanchitk330_db_user:Sanchit%40123@cluster0.lqpoxrd.mongodb.net/?appName=Cluster0"
-client = MongoClient(MONGO_URI)
+MONGO_URI = os.getenv('MONGO_URI')
+client = pymongo.MongoClient(MONGO_URI)
 db = client.my_database
 collection = db.users
 
